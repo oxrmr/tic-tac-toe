@@ -1,3 +1,5 @@
+'use-client'
+
 import { useState, type ReactNode } from "react";
 import { UIButton, UIButtonSizes, UIButtonVariants } from "../uikit/ui-button/ui-button";
 import { CircleIcon } from "./assets/svg/circle-icon";
