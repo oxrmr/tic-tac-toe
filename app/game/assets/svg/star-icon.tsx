@@ -1,4 +1,4 @@
-export const StarIcon = ({ size = "12" }: { size?: string }) => {
+export const StarIcon = ({ size = '12' }: { size?: string }) => {
   return (
     <svg
       width={size}

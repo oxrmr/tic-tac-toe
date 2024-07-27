@@ -1,38 +1,27 @@
-'use-client'
+'use client';
 
-import { useState, type ReactNode } from "react";
-import { UIButton, UIButtonSizes, UIButtonVariants } from "../uikit/ui-button/ui-button";
-import { CircleIcon } from "./assets/svg/circle-icon";
-import { CrossIcon } from "./assets/svg/cross-icon";
+import { type ReactNode } from 'react';
+import { GAME_SYMBOLS } from '../game-symbol/constants';
+import { GameSymbol } from '../game-symbol/game-symbol';
+import { UIButton, UIButtonSizes, UIButtonVariants } from '../uikit/ui-button/ui-button';
+import { useGameState, type UseGameStateReturn } from './use-game-state';
 
-interface GameFieldProps {
-  className?: string;
-}
 
-enum GAME_SYMBOLS {
-  CROSS = 'cross',
-  CIRCLE = 'circle',
-  TRIANGLE = 'triangle',
-  SQUARE = 'square'
-}
-
-const MOVES_ORDER = [
+export const MOVES_ORDER = [
   GAME_SYMBOLS.CROSS,
   GAME_SYMBOLS.CIRCLE,
   GAME_SYMBOLS.TRIANGLE,
   GAME_SYMBOLS.SQUARE
-]
+];
 
-function getNextMove(currentMove: GAME_SYMBOLS) {
-  const nextMoveIndex = MOVES_ORDER.indexOf(currentMove) + 1
-  return MOVES_ORDER[nextMoveIndex] ?? MOVES_ORDER[0]
+
+interface GameFieldProps {
+  gameState: UseGameStateReturn;
+  className?: string;
 }
 
-export const GameField = ({ className }: GameFieldProps) => {
-  const [cells, setCells] = useState(() => Array(19 * 19).fill(null));
-  const [currentMove, setCurrentMove] = useState(GAME_SYMBOLS.CROSS);
-
-  const nextMove = getNextMove(currentMove)
+export const GameField = ({ gameState, className }: GameFieldProps) => {
+  const { currentMove, nextMove, cells, handleCellClick } = gameState;
 
   const actions = (
     <div className="flex items-center gap-3">
@@ -49,19 +38,21 @@ export const GameField = ({ className }: GameFieldProps) => {
         Give up
       </UIButton>
     </div>
-  )
+  );
 
   return (
     <GameFieldLayout className={className}>
       <GameMoveInfo
-        actions={
-          actions
-        }
+        actions={actions}
+        currentMove={currentMove}
+        nextMove={nextMove}
       />
       <GameGrid>
         {cells
-          .map((_, i) => (
-            <GameCell key={i}>{_}</GameCell>
+          .map((symbol, i) => (
+            <GameCell key={i} onClick={handleCellClick(i)}>
+              {symbol && <GameSymbol className='w-5 h-5' symbol={symbol} />}
+            </GameCell>
           ))}
       </GameGrid>
     </GameFieldLayout>
@@ -77,15 +68,20 @@ function GameFieldLayout({
   );
 }
 
-function GameMoveInfo({ actions }: Readonly<{ actions: ReactNode }>) {
+function GameMoveInfo({ actions, currentMove, nextMove }:
+  Readonly<{
+    actions: ReactNode,
+    currentMove: GAME_SYMBOLS,
+    nextMove: GAME_SYMBOLS
+  }>) {
   return (
     <div className="mb-2 flex justify-between">
       <div>
         <span className="flex items-center gap-1 text-xl">
-          Move: <CircleIcon size="20" />
+          Move: <GameSymbol className="w-5 h-5" symbol={currentMove} />
         </span>
         <span className="flex items-center gap-1 text-xs text-slate-400">
-          Next: <CrossIcon />
+          Next: <GameSymbol className="w-3 h-3" symbol={nextMove} />
         </span>
       </div>
       {actions}
@@ -98,11 +94,13 @@ function GameGrid({ children }: Readonly<{ children: ReactNode }>) {
     <div className="grid grid-cols-[repeat(19,_30px)] grid-rows-[repeat(19,_30px)]">
       {children}
     </div>
-  )
+  );
 }
 
-function GameCell({ children }: Readonly<{ children: ReactNode }>) {
-  return (
-    <button className="border" >{children}</ button>
-  )
-}
+function GameCell({ children, onClick }: Readonly<{
+  children: ReactNode;
+  onClick: () => void
+}>) {
+  return <button className="justify-center flex border items-center" onClick={onClick}>{children}</ button>;
+
+} 

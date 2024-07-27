@@ -1,6 +1,8 @@
-export const CircleIcon = ({ size = "12" }: { size?: string }) => {
+export const CircleIcon = ({ size = '12', className }: { size?: string, className?: string }) => {
   return (
     <svg
+      className={className}
+
       width={size}
       height={size}
       viewBox="0 0 12 12"

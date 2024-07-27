@@ -1,7 +1,7 @@
-import { Profile } from "../profile/profile";
-import { UIButton, UIButtonSizes, UIButtonVariants } from "../uikit/ui-button/ui-button";
-import { ArrowDown } from "./assets/arrow-down";
-import { Logo } from "./assets/logo";
+import { Profile } from '../profile/profile';
+import { UIButton, UIButtonSizes, UIButtonVariants } from '../uikit/ui-button/ui-button';
+import { ArrowDown } from './assets/arrow-down';
+import { Logo } from './assets/logo';
 
 export const Header = () => {
   return (
@@ -12,7 +12,7 @@ export const Header = () => {
         Play
       </UIButton>
       <button className="ml-auto flex items-center gap-2 text-teal-600 transition-colors hover:text-teal-500">
-        <Profile name="MixCherry" />
+        <Profile name="MixCherry" rating='2333' avatar='_' />
         <ArrowDown />
       </button>
     </header>
