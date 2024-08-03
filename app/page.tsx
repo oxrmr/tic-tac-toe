@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Field, ParticipantsInfo, Title, useGameState } from './game';
 import { Header } from './header/index';
-import { log } from 'console';
 
 export default function Home() {
-  const [playersCount, setPlayersCount] = useState(4);
+  const [playersCount, setPlayersCount] = useState(3);
   const gameState = useGameState(playersCount);
 
   return (
@@ -21,6 +20,8 @@ export default function Home() {
           className='mb-6'
           currentMove={gameState.currentMove}
           playersCount={playersCount}
+          isWinner={!!gameState.winnerSymbol}
+          onPlayerTimeOver={gameState.handlePlayerTimeOver}
         />
         <Field gameState={gameState} />
       </main>

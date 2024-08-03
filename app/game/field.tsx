@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { type ReactNode } from 'react';
 import { GAME_SYMBOLS } from '../game-symbol/constants';
 import { GameSymbol } from '../game-symbol/game-symbol';
@@ -53,6 +54,8 @@ export const Field = ({ gameState, className }: FieldProps) => {
         {cells.map((symbol, i) => (
           <GameCell
             key={i}
+            disabled={!!gameState.winnerSymbol}
+            isWinner={!!gameState.winnerSequence?.includes(i)}
             onClick={handleCellClick(i)}
           >
             {symbol && (
@@ -124,13 +127,21 @@ function GameGrid({ children }: Readonly<{ children: ReactNode }>) {
 function GameCell({
   children,
   onClick,
+  isWinner,
+  disabled,
 }: Readonly<{
   children: ReactNode;
   onClick: () => void;
+  isWinner: boolean;
+  disabled: boolean;
 }>) {
   return (
     <button
-      className='flex items-center justify-center border'
+      disabled={disabled}
+      className={clsx(
+        'flex items-center justify-center border',
+        isWinner && 'bg-green-400',
+      )}
       onClick={onClick}
     >
       {children}

@@ -2,24 +2,26 @@ import { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { setInterval } from 'timers';
 import { players } from '../../db';
 import type { GAME_SYMBOLS } from '../game-symbol/constants';
 import { GameSymbol } from '../game-symbol/game-symbol';
-import { Profile } from '../profile/profile';
 import { useInterval } from '../hooks';
-import { log } from 'console';
+import { Profile } from '../profile/profile';
 
 interface ParticipantsInfoProps {
   currentMove: GAME_SYMBOLS;
   playersCount: number;
   className?: string;
+  isWinner: boolean;
+  onPlayerTimeOver: (symbol: GAME_SYMBOLS) => () => void;
 }
 
 export const ParticipantsInfo = ({
   playersCount,
   currentMove,
+  onPlayerTimeOver,
   className,
+  isWinner,
 }: ParticipantsInfoProps) => {
   return (
     <div
@@ -29,8 +31,9 @@ export const ParticipantsInfo = ({
         <PlayerInfo
           key={player.name}
           playerInfo={player}
+          onTimeOver={onPlayerTimeOver(player.symbol)}
           isItemReversed={index % 2 === 1}
-          isTimerRunning={currentMove === player.symbol}
+          isTimerRunning={currentMove === player.symbol && !isWinner}
         />
       ))}
     </div>
@@ -39,6 +42,7 @@ export const ParticipantsInfo = ({
 
 function PlayerInfo({
   playerInfo,
+  onTimeOver,
   isItemReversed,
   isTimerRunning,
 }: Readonly<PlayerInfoProps>) {
@@ -57,6 +61,12 @@ function PlayerInfo({
     },
     seconds !== 0 ? 1000 : null,
   );
+
+  useEffect(() => {
+    if (seconds === 0) {
+      onTimeOver();
+    }
+  }, [seconds]);
 
   const getTimerColor = () => {
     if (isTimerRunning) {
@@ -101,6 +111,7 @@ function PlayerInfo({
 interface PlayerInfoProps {
   isItemReversed: boolean;
   isTimerRunning: boolean;
+  onTimeOver: () => void;
   playerInfo: {
     name: string;
     symbol: string;
