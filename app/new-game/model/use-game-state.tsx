@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { GAME_SYMBOLS } from '../game-symbol/constants';
-import { computeWinner, getNextMove } from '../model';
+import { GAME_SYMBOLS } from '../../game-symbol/constants';
+import { computeWinner } from './compute-winner';
+import { getNextMove } from './get-next-move';
 
 export interface UseGameStateReturn {
   nextMove: GAME_SYMBOLS;
@@ -12,12 +13,14 @@ export interface UseGameStateReturn {
   winnerSymbol: number | GAME_SYMBOLS | undefined;
 }
 
+interface IUseState {
+  playerTimeOver: GAME_SYMBOLS[];
+  currentMove: GAME_SYMBOLS;
+  cells: any[];
+}
+
 export const useGameState = (playersCount: number): UseGameStateReturn => {
-  const [gameState, setGameState] = useState<{
-    playerTimeOver: GAME_SYMBOLS[];
-    currentMove: GAME_SYMBOLS;
-    cells: any[];
-  }>(() => ({
+  const [gameState, setGameState] = useState<IUseState>(() => ({
     cells: Array(19 * 19).fill(null),
     currentMove: GAME_SYMBOLS.CROSS,
     playerTimeOver: [],

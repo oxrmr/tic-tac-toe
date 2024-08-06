@@ -8,10 +8,10 @@ export enum UIModalSizes {
 }
 
 interface UIModalProps {
-  width: string;
-  isOpen: boolean;
-  onClose: () => void;
-  children: ReactNode;
+  width?: string;
+  isOpen?: boolean;
+  onClose?: () => void;
+  children?: ReactNode;
   className?: string;
 }
 

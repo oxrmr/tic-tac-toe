@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { players } from '../../db';
+import { players } from '../../players';
 import type { GAME_SYMBOLS } from '../game-symbol/constants';
 import { GameSymbol } from '../game-symbol/game-symbol';
 import { useInterval } from '../hooks';

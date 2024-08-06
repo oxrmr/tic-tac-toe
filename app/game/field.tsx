@@ -104,7 +104,7 @@ function GameMoveInfo({
           />
         </span>
         <span className='flex items-center gap-1 text-xs text-slate-400'>
-          Next:{' '}
+          Next:
           <GameSymbol
             className='h-3 w-3'
             symbol={nextMove}
@@ -139,7 +139,7 @@ function GameCell({
     <button
       disabled={disabled}
       className={clsx(
-        'flex items-center justify-center border',
+        '-mb-px -mr-px flex items-center justify-center border',
         isWinner && 'bg-green-400',
       )}
       onClick={onClick}
