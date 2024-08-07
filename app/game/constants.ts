@@ -1,4 +1,19 @@
-import { GAME_SYMBOLS } from './app/game-symbol/constants';
+export const PLAYERS_COUNT = 2;
+
+
+export enum GAME_SYMBOLS {
+  CROSS = 'cross',
+  CIRCLE = 'circle',
+  TRIANGLE = 'triangle',
+  SQUARE = 'square',
+}
+
+export const MOVES_ORDER = [
+  GAME_SYMBOLS.CROSS,
+  GAME_SYMBOLS.CIRCLE,
+  GAME_SYMBOLS.TRIANGLE,
+  GAME_SYMBOLS.SQUARE,
+];
 
 export const PLAYERS = [
   {

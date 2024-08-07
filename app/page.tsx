@@ -1,8 +1,8 @@
 'use client';
 
 import { type ReactNode } from 'react';
+import { Game } from './game';
 import { Header } from './header/index';
-import { Game } from './new-game';
 
 export default function Home() {
   return (
@@ -21,9 +21,7 @@ function HomePageLayout(
   return (
     <div className='min-h-screen bg-slate-50'>
       {props.header}
-      <main className='mx-auto min-h-screen max-w-[616px] pt-6'>
-        {props.children}
-      </main>
+      <main className='mx-auto min-h-screen max-w-[616px] pt-6'>{props.children}</main>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import { CircleIcon } from '../new-game/ui/assets/svg/circle-icon';
-import { CrossIcon } from '../new-game/ui/assets/svg/cross-icon';
-import { SquareIcon } from '../new-game/ui/assets/svg/square-icon';
-import { TriangleIcon } from '../new-game/ui/assets/svg/triangle-icon';
-import { GAME_SYMBOLS } from './constants';
+import { GAME_SYMBOLS } from '../constants';
+import { CircleIcon } from '../ui/assets/svg/circle-icon';
+import { CrossIcon } from '../ui/assets/svg/cross-icon';
+import { SquareIcon } from '../ui/assets/svg/square-icon';
+import { TriangleIcon } from '../ui/assets/svg/triangle-icon';
 
 interface GameSymbolProps {
   symbol: string;

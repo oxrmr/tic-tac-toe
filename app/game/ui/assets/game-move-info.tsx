@@ -1,5 +1,5 @@
-import type { GAME_SYMBOLS } from '@/app/game-symbol/constants';
-import { GameSymbol } from '@/app/game-symbol/game-symbol';
+import { GameSymbol } from '@/app/game/game-symbol/game-symbol';
+import type { GAME_SYMBOLS } from '@/app/new-game/game-symbol/constants';
 import type { FC } from 'react';
 
 interface GameMoveInfoProps {

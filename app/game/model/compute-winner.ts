@@ -1,11 +1,11 @@
-export function computeWinner(cells: any[], sequenceSize = 5, fieldSize = 19) {
+export const computeWinner = (state: any, sequenceSize = 5, fieldSize = 19) => {
   const gap = Math.floor(sequenceSize / 2);
 
-  for (let i = 0; i < cells.length; i++) {
-    if (cells[i]) {
+  for (let i = 0; i < state.cells.length; i++) {
+    if (state.cells[i]) {
       const indexRow = getSequenceIndexes(i, sequenceSize, fieldSize, gap);
 
-      const winnerIndexes = indexRow.find(row => compareElements(row, cells));
+      const winnerIndexes = indexRow.find(row => compareElements(row, state.cells));
 
       if (winnerIndexes) {
         return winnerIndexes;
@@ -13,14 +13,9 @@ export function computeWinner(cells: any[], sequenceSize = 5, fieldSize = 19) {
     }
   }
   return undefined;
-}
+};
 
-function getSequenceIndexes(
-  index: number,
-  sequenceSize: number,
-  fieldSize: number,
-  gap: number,
-) {
+function getSequenceIndexes(index: number, sequenceSize: number, fieldSize: number, gap: number) {
   const res: number[][] = [
     [], // -
     [], // \

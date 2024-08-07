@@ -1,7 +1,7 @@
-import type { GAME_SYMBOLS } from '@/app/game-symbol/constants';
-import { GameSymbol } from '@/app/game-symbol/game-symbol';
+import { GameSymbol } from '@/app/game/game-symbol/game-symbol';
 import clsx from 'clsx';
 import type { FC } from 'react';
+import type { GAME_SYMBOLS } from '../constants';
 
 interface GameCellProps {
   onClick: () => void;
