@@ -36,7 +36,7 @@ export const useGameState = (playersCount: number): UseGameStateReturn => {
   const winnerSymbol =
     nextMove === gameState.currentMove
       ? gameState.currentMove
-      : winnerSequence?.[0];
+      : gameState.cells[winnerSequence?.[0]];
 
   const handleCellClick = (index: number) => () => {
     setGameState(prevState => {

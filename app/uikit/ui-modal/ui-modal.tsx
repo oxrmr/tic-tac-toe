@@ -15,20 +15,13 @@ interface UIModalProps {
   className?: string;
 }
 
-export const UIModal: FC<UIModalProps> = ({
-  isOpen = false,
-  onClose,
-  width = '550',
-  children,
-  className,
-}) => {
+export const UIModal: FC<UIModalProps> = props => {
   const handleClick = (e: MouseEvent) => {
-    const modal = e.target.closest('[data-id="modal"]');
-    if (modal) return;
-    onClose();
+    if (e.target.closest('[data-id="modal"]')) return;
+    props.onClose();
   };
 
-  if (!isOpen) return;
+  if (!props.isOpen) return;
 
   const modal = (
     <div
@@ -39,18 +32,18 @@ export const UIModal: FC<UIModalProps> = ({
         data-id='modal'
         className={clsx(
           'relative mx-auto mt-10 flex min-h-[320px] min-w-[640px] flex-col rounded bg-white text-2xl leading-tight',
-          className,
-          width,
+          props.className,
+          props.width,
         )}
       >
         <button
           className='absolute left-[calc(100%_+_12px)] h-8 w-8 cursor-pointer rounded bg-white/10 px-2 py-1 text-white transition-colors hover:bg-white/40'
-          onClick={onClose}
+          onClick={props.onClose}
           type='button'
         >
           <ModalCloseIcon size='16' />
         </button>
-        {children}
+        {props.children}
       </div>
     </div>
   );

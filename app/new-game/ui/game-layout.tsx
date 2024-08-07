@@ -27,7 +27,7 @@ export const GameLayout: FC<GameLayoutProps> = props => {
       <div className={'rounded-2xl bg-white px-5 pb-7 pt-5 shadow-md'}>
         <div className='flex items-center gap-3'>
           <div className='mb-2 flex justify-between'>{props.gameMoveInfo}</div>
-          {/* {props.actions} */}
+          {props.actions}
         </div>
         <div className='grid grid-cols-[repeat(19,_30px)] grid-rows-[repeat(19,_30px)]'>
           {props.gameCells}

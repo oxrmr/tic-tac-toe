@@ -2,14 +2,17 @@ import { GameSymbol } from '@/app/game-symbol/game-symbol';
 import clsx from 'clsx';
 import { type FC } from 'react';
 
-interface PlayerInfoProps {
-  isItemReversed: boolean;
-  isTimerRunning: boolean;
-  seconds: number;
+export type Player = {
   name: string;
   symbol: string;
   rating: string;
   avatar: string;
+};
+
+interface PlayerInfoProps extends Player {
+  isItemReversed: boolean;
+  isTimerRunning: boolean;
+  seconds: number;
 }
 
 export const PlayerInfo: FC<PlayerInfoProps> = props => {

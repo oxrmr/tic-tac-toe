@@ -7,7 +7,8 @@ export const BackLink = () => {
       className='flex items-center gap-2 text-xs text-teal-600'
       href='/'
     >
-      <ArrowLeft /> Home
+      <ArrowLeft />
+      Home
     </Link>
   );
 };
