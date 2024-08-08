@@ -1,5 +1,5 @@
-export const computeWinnerSymbol = (gameState, { nextMove, winnerSequence }) => {
-  return nextMove === gameState.currentMove
-    ? gameState.currentMove
+export const computeWinnerSymbol = (gameState, { nextMoveSymbol, winnerSequence }) => {
+  return nextMoveSymbol === gameState.currentMoveSymbol
+    ? gameState.currentMoveSymbol
     : gameState.cells[winnerSequence?.[0]];
 };

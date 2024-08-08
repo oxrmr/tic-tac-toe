@@ -1,4 +1,5 @@
 import { GameSymbol } from '@/app/game/game-symbol/game-symbol';
+import { useNow } from '@/app/lib/timers';
 import clsx from 'clsx';
 import { type FC } from 'react';
 
@@ -11,21 +12,24 @@ export type Player = {
 
 interface PlayerInfoProps extends Player {
   isItemReversed: boolean;
-  isTimerRunning: boolean;
-  seconds: number;
+  timer: number;
+  timerStartAt: number;
 }
 
 export const PlayerInfo: FC<PlayerInfoProps> = props => {
-  const minutesString = String(Math.floor(props.seconds / 60)).padStart(2, '0');
-  const secondsString = String(props.seconds % 60).padStart(2, '0');
+  const now = useNow(1000, props.timerStartAt);
+  const ms = Math.max(now ? props.timer - (now - props.timerStartAt) : props.timer, 0);
+  const seconds = Math.ceil(ms / 1000);
+  const minutesString = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const secondsString = String(seconds % 60).padStart(2, '0');
 
-  const isDanger = props.seconds < 10;
+  const isDanger = seconds < 10;
 
   const getTimerColor = () => {
-    if (props.isTimerRunning) {
-      return isDanger ? 'text-orange-600' : 'text-slate-200';
+    if (props.timerStartAt) {
+      return isDanger ? 'text-orange-600' : 'text-slate-900';
     }
-    return 'text-slate-900';
+    return 'text-slate-200';
   };
 
   return (
