@@ -86,7 +86,6 @@ export const Game = () => {
           <PlayerInfo
             {...player}
             isItemReversed={i % 2 === 1}
-            isTimerRunning
             timer={gameState.timers[player.symbol]}
             key={player.name}
           />
